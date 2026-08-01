@@ -1,0 +1,19 @@
+{
+  "name": "st1ggy-github-io",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/check": "0.9.10",
+    "astro": "7.1.6",
+    "typescript": "6.0.3"
+  },
+  "devDependencies": {
+    "sass": "1.102.0"
+  }
+}

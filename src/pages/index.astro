@@ -1,0 +1,193 @@
+---
+import ProjectCard from "../components/ProjectCard.astro";
+import { projects } from "../data/projects";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "St1ggy — миры и проекты";
+const description = "Личная коллекция миров, историй и цифровых проектов.";
+---
+
+<BaseLayout {title} {description}>
+  <main>
+    <header class="header">
+      <a class="brand" href="/" aria-label="На главную">S<span>1</span></a>
+      <p class="header__note">Миры · истории · проекты</p>
+      <span class="header__mark" aria-hidden="true">[ 01—∞ ]</span>
+    </header>
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__intro">
+        <span class="kicker">Персональный архив</span>
+        <h1 id="hero-title">Место, где<br />живут <em>миры.</em></h1>
+      </div>
+      <p class="hero__copy">
+        Собираю здесь вымышленные вселенные, инструменты и эксперименты. Каждый проект — отдельная дверь.
+      </p>
+    </section>
+
+    <section class="catalogue" aria-labelledby="catalogue-title">
+      <div class="section-heading">
+        <h2 id="catalogue-title">Избранные проекты</h2>
+        <span>{String(projects.length).padStart(2, "0")}</span>
+      </div>
+      <div class="projects">
+        {projects.map((project, index) => <ProjectCard {project} {index} />)}
+      </div>
+    </section>
+
+    <footer>
+      <p>Создано на границе реального и вымышленного.</p>
+      <p>© {new Date().getFullYear()} St1ggy</p>
+    </footer>
+  </main>
+</BaseLayout>
+
+<style lang="scss">
+  main {
+    width: min(100% - 2rem, 1500px);
+    margin: 0 auto;
+  }
+
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    min-height: 7rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .brand {
+    width: fit-content;
+    font-family: "Unbounded", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: -0.08em;
+  }
+
+  .brand span {
+    color: var(--accent);
+  }
+
+  .header__note,
+  .header__mark,
+  .kicker,
+  .section-heading,
+  footer {
+    font-family: "Unbounded", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .header__note,
+  .header__mark {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.58rem;
+  }
+
+  .header__mark {
+    justify-self: end;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.8fr) minmax(16rem, 0.7fr);
+    align-items: end;
+    gap: 3rem;
+    min-height: clamp(32rem, 68vh, 49rem);
+    padding: 6rem 0 5rem;
+  }
+
+  .kicker {
+    display: block;
+    margin-bottom: 2rem;
+    color: var(--accent);
+    font-size: 0.64rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-family: "Unbounded", sans-serif;
+    font-size: clamp(3.1rem, 8.4vw, 8.7rem);
+    font-weight: 400;
+    line-height: 0.94;
+    letter-spacing: -0.075em;
+  }
+
+  h1 em {
+    color: var(--accent);
+    font-family: Georgia, serif;
+    font-weight: 400;
+  }
+
+  .hero__copy {
+    max-width: 28rem;
+    margin: 0 0 0.5rem;
+    color: #aeb4b2;
+    font-size: clamp(1rem, 1.3vw, 1.15rem);
+    line-height: 1.65;
+  }
+
+  .catalogue {
+    padding: 2rem 0 8rem;
+  }
+
+  .section-heading {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+    color: var(--muted);
+    font-size: 0.6rem;
+  }
+
+  .section-heading h2 {
+    margin: 0;
+    font: inherit;
+  }
+
+  .projects {
+    display: grid;
+    gap: 1rem;
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.55rem;
+    line-height: 1.5;
+  }
+
+  footer p {
+    margin: 0;
+  }
+
+  @media (max-width: 720px) {
+    .header {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .header__note {
+      display: none;
+    }
+
+    .hero {
+      grid-template-columns: 1fr;
+      align-content: center;
+      min-height: 42rem;
+      padding: 4rem 0;
+    }
+
+    .catalogue {
+      padding-bottom: 5rem;
+    }
+
+    footer {
+      flex-direction: column;
+    }
+  }
+</style>

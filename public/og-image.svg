@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="g" cx="70%" cy="25%" r="65%">
+      <stop offset="0" stop-color="#28463d"/>
+      <stop offset="1" stop-color="#090b0d"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <circle cx="945" cy="150" r="180" fill="none" stroke="#a8c9bc" stroke-opacity=".2"/>
+  <text x="80" y="120" fill="#a8c9bc" font-family="Arial" font-size="24" letter-spacing="5">ST1GGY · PROJECTS</text>
+  <text x="75" y="340" fill="#f1eee6" font-family="Arial" font-size="110" font-weight="bold">Место, где</text>
+  <text x="75" y="470" fill="#f1eee6" font-family="Arial" font-size="110" font-weight="bold">живут миры.</text>
+</svg>
