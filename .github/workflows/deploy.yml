@@ -23,6 +23,20 @@ jobs:
         with:
           ref: main
 
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - uses: actions/configure-pages@v6
+
+      - name: Install landing dependencies
+        run: npm ci
+
+      - name: Build landing site
+        run: npm run build
+
       - name: Check out private encyclopedia sources
         uses: actions/checkout@v7
         with:
@@ -32,22 +46,9 @@ jobs:
           ssh-key: ${{ secrets.OBSIDIAN_READ_KEY }}
           persist-credentials: false
 
-      - uses: actions/setup-node@v7
-        with:
-          node-version: 24
-          cache: npm
-          cache-dependency-path: |
-            package-lock.json
-            _content/obsidian/Games/TRPG/SWADE/veil/web/package-lock.json
-
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-
-      - uses: actions/configure-pages@v6
-
-      - name: Install landing dependencies
-        run: npm ci
 
       - name: Prepare Veil wiki generator
         working-directory: _content/obsidian/Games/TRPG/SWADE/veil
@@ -61,9 +62,6 @@ jobs:
         run: |
           npm ci --force
           npm run build
-
-      - name: Build landing site
-        run: npm run build
 
       - name: Add Veil to Pages artifact
         run: |
