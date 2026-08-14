@@ -46,6 +46,9 @@ jobs:
 
       - uses: actions/configure-pages@v6
 
+      - name: Install landing dependencies
+        run: npm ci
+
       - name: Prepare Veil wiki generator
         working-directory: _content/obsidian/Games/TRPG/SWADE/veil
         run: python3 -m venv .venv && .venv/bin/pip install PyYAML
@@ -60,9 +63,7 @@ jobs:
           npm run build
 
       - name: Build landing site
-        run: |
-          npm ci
-          npm run build
+        run: npm run build
 
       - name: Add Veil to Pages artifact
         run: |
