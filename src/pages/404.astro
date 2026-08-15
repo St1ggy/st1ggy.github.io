@@ -2,48 +2,24 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Страница не найдена — St1ggy" description="Такой страницы не существует.">
+<BaseLayout title="Координата не найдена — St1ggy Atlas" description="Такой координаты в атласе нет.">
   <main>
-    <span>Ошибка 404</span>
-    <h1>Этой двери<br />не существует.</h1>
-    <a href="/">Вернуться в реальность →</a>
+    <header><a href="/">S1 / ATLAS</a><span>ERROR 404</span></header>
+    <section>
+      <p>Неизвестная координата</p>
+      <h1>Этого мира<br />нет на карте.</h1>
+      <a class="return" href="/">Вернуться к атласу <span>↗</span></a>
+    </section>
   </main>
 </BaseLayout>
 
 <style lang="scss">
-  main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: min(100% - 2rem, 1500px);
-    min-height: 100vh;
-    margin: auto;
-  }
-
-  span,
-  a {
-    font-family: "Unbounded", sans-serif;
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  span {
-    color: var(--accent);
-  }
-
-  h1 {
-    margin: 2rem 0 4rem;
-    font-family: "Unbounded", sans-serif;
-    font-size: clamp(3.2rem, 9vw, 8rem);
-    font-weight: 400;
-    line-height: 0.95;
-    letter-spacing: -0.07em;
-  }
-
-  a {
-    width: fit-content;
-    text-decoration-color: var(--accent);
-    text-underline-offset: 0.5rem;
-  }
+  main { display: grid; grid-template-rows: auto 1fr; width: min(100% - 2rem, 1500px); min-height: 100vh; margin: 0 auto; }
+  header { display: flex; align-items: center; justify-content: space-between; min-height: 6rem; border-bottom: 1px solid var(--ink); font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; }
+  header a { font-family: var(--display); font-size: 1.2rem; font-weight: 700; text-decoration: none; }
+  section { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+  section::after { position: absolute; z-index: -1; right: -4rem; width: 38rem; height: 38rem; border: 1px solid var(--line); border-radius: 50%; box-shadow: inset 0 0 0 7rem var(--paper), inset 0 0 0 calc(7rem + 1px) var(--line); content: ""; }
+  p { margin: 0 0 1rem; color: var(--orange); font-family: var(--mono); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  h1 { margin: 0; font-family: var(--display); font-size: clamp(4rem, 11vw, 10rem); font-weight: 650; line-height: 0.78; letter-spacing: -0.055em; text-transform: uppercase; }
+  .return { display: flex; justify-content: space-between; width: min(100%, 24rem); margin-top: 4rem; padding: 0.8rem 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); font-family: var(--mono); font-size: 0.62rem; font-weight: 700; text-decoration: none; text-transform: uppercase; }
 </style>
