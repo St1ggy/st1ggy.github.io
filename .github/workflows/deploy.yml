@@ -68,6 +68,22 @@ jobs:
           mkdir -p dist/games/trpg/swade/veil
           cp -R _content/obsidian/Games/TRPG/SWADE/veil/site/. dist/games/trpg/swade/veil/
 
+      - name: Build Bleach rulebook
+        working-directory: _content/obsidian/Games/TRPG/SWADE/Bleach/web
+        env:
+          SITE_URL: https://st1ggy.github.io
+          BASE_PATH: /games/trpg/swade/bleach
+        run: |
+          npm ci
+          npm test
+          npm run check
+          npm run build
+
+      - name: Add Bleach to Pages artifact
+        run: |
+          mkdir -p dist/games/trpg/swade/bleach
+          cp -R _content/obsidian/Games/TRPG/SWADE/Bleach/site/. dist/games/trpg/swade/bleach/
+
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist

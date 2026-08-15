@@ -1,0 +1,79 @@
+---
+import type { World } from "../data/projects";
+
+interface Props {
+  world: World;
+  index: number;
+}
+
+const { world, index } = Astro.props;
+const number = String(index + 1).padStart(2, "0");
+---
+
+<article class:list={["world", `world--${world.slug}`]}>
+  <a href={world.href} aria-label={`Открыть мир «${world.title}»`}>
+    <header class="world__header">
+      <span>{number}</span>
+      <p>{world.coordinate}</p>
+      <b>{world.eyebrow}</b>
+    </header>
+    <div class="world__body">
+      <div class="world__copy">
+        <p class="world__subtitle">{world.subtitle}</p>
+        <h2>{world.title}</h2>
+        <p>{world.description}</p>
+      </div>
+      <div class="world__signal" aria-hidden="true"><i></i><i></i><i></i></div>
+    </div>
+    <footer class="world__footer">
+      <ul>{world.contents.map((item) => <li>{item}</li>)}</ul>
+      <span>{world.status} <b aria-hidden="true">↗</b></span>
+    </footer>
+  </a>
+</article>
+
+<style lang="scss">
+  .world { border: 1px solid var(--ink); }
+  .world > a { display: block; min-height: 32rem; color: inherit; text-decoration: none; }
+  .world__header { display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center; min-height: 3rem; padding: 0.6rem 0.8rem; border-bottom: 1px solid currentColor; font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.09em; text-transform: uppercase; }
+  .world__header p { margin: 0; text-align: center; }
+  .world__header b { font-weight: 500; }
+  .world__body { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) minmax(13rem, 0.65fr); min-height: 24rem; padding: clamp(1.2rem, 4vw, 3rem); }
+  .world__copy { position: relative; z-index: 2; align-self: end; }
+  .world__subtitle { margin: 0 0 0.5rem; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.11em; text-transform: uppercase; }
+  h2 { margin: 0; font-family: var(--display); font-size: clamp(4rem, 10vw, 9rem); font-weight: 700; line-height: 0.78; letter-spacing: -0.055em; text-transform: uppercase; }
+  .world__copy > p:last-child { max-width: 38rem; margin: 1.5rem 0 0; font-size: clamp(0.9rem, 1.4vw, 1.05rem); line-height: 1.55; }
+  .world__signal { position: relative; min-height: 15rem; }
+  .world__signal i { position: absolute; inset: 50% auto auto 50%; width: 16rem; height: 16rem; border: 1px solid currentColor; border-radius: 50%; transform: translate(-50%, -50%); }
+  .world__signal i:nth-child(2) { width: 10rem; height: 10rem; }
+  .world__signal i:nth-child(3) { width: 2.5rem; height: 2.5rem; background: currentColor; }
+  .world__footer { display: flex; gap: 2rem; align-items: center; justify-content: space-between; min-height: 4.5rem; padding: 0.8rem; border-top: 1px solid currentColor; }
+  .world__footer ul { display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; margin: 0; padding: 0; list-style: none; }
+  .world__footer li, .world__footer > span { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  .world__footer > span { font-weight: 700; }
+  .world__footer b { font-size: 1rem; }
+  .world a { transition: color 180ms ease, background 180ms ease; }
+  .world a:hover, .world a:focus-visible { outline: 0; }
+
+  .world--veil { color: #e7f1ec; background: #10231f; }
+  .world--veil .world__body { background: radial-gradient(circle at 82% 25%, rgb(111 199 164 / 24%), transparent 22rem), linear-gradient(135deg, #17312a, #0a1311); }
+  .world--veil .world__subtitle { color: #8fd6bc; }
+  .world--veil .world__signal { color: #71c7a6; opacity: 0.45; }
+  .world--veil a:hover { color: white; background: #183a30; }
+
+  .world--bleach { color: #0c0c0d; background: #fffdf7; }
+  .world--bleach .world__body { background: linear-gradient(120deg, transparent 0 65%, #19b9ca 65% 79%, #ff5a1f 79%); }
+  .world--bleach .world__subtitle { color: #d33a0d; }
+  .world--bleach .world__signal { color: #0c0c0d; }
+  .world--bleach .world__signal::before { position: absolute; top: 50%; left: -4rem; width: 27rem; height: 0.6rem; background: #0c0c0d; transform: rotate(-12deg); content: ""; }
+  .world--bleach a:hover { color: white; background: #0c0c0d; }
+
+  @media (max-width: 760px) {
+    .world > a { min-height: 0; }
+    .world__header { grid-template-columns: auto 1fr; }
+    .world__header b { display: none; }
+    .world__body { grid-template-columns: 1fr; min-height: 28rem; }
+    .world__signal { position: absolute; top: 0; right: -4rem; width: 14rem; opacity: 0.38; }
+    .world__footer { align-items: flex-start; flex-direction: column; }
+  }
+</style>
